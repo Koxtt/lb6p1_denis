@@ -5,6 +5,7 @@
 package lab6p1_deniszepeda;
 
 import static java.lang.Math.random;
+import java.security.SecureRandom;
 import java.util.Scanner;
 
 /**
@@ -34,26 +35,8 @@ public class Lab6P1_DenisZepeda {
                     break;
                 
                 case 1:
-                    int opc;
-                    System.out.println("SUBMENU");
-                    System.out.println("Ahorcados en Java");
-                    System.out.println("1) Palabras Fciles");
-                    System.out.println("2) Palabras Dificiles");
-                    opc = entry.nextInt();
-                    
-                    switch (opc) {
-                        case 1:
-                            System.out.println("Palabras Faciles");
-                            ahorcadosfacil();
-                            break;
-                        case 2:
-                            System.out.println("Palabras Dificiles");
-                            ahorcadosdificil();
-                            break;
-                        default:
-                            System.out.println("ERROR...Opcion no valida");
-                            continue;
-                    }
+                    System.out.println("Palabras faciles o dificiles");
+                    ahorcadosfacil();
                     
                     break;
                 case 2:
@@ -69,20 +52,97 @@ public class Lab6P1_DenisZepeda {
         
         
         
-        public static String[] ahorcadosfacil(String[] palabrasFacil){
+        
+
+    public static String[] ahorcadosfacil() {
+
+        int opc;
+        System.out.println("1) Palabras faciles ");
+        System.out.println("2) Palabras Dificiles ");
+        do {
+            if (opc = 1) {
+                System.out.println("Cadenas de 12 caracteres, 10 Vidas");
+                Scanner scan = new Scanner(System.in);
+                Secure rand = new SecureRandom();
+                int intentos = 10;
+                boolean caracterv = false;
+                String caracter = "";
+                String[] palarasFacil = {"hangman", "scanner", "validar", "ceviche", "strings", "3arrays",
+                    "algebra", "program", "calculo", "chatgpt", "pokemon", "strokes", "11yonce"};
+                int rand = random.nextInt(palabrasFacil.length);
+
+                for (int i = 0; i < palabrasFacil.length; i++) {
+                    if (i == rand) {
+                        caracter = palabrasFacil[i];
+                    }
+                }
+
+                String adivinarcar = "";
+
+                for (int i = 0; i < caracter.length(); i++) {
+                    adivinarcar += "_";
+                }
+
+                while (intentos > 0 && !caracterv) {
+                    System.out.println("\n=============================================");
+                    System.out.println("Palabra: " + adivinarcar);
+                    System.out.println("Vidas restantes: " + intentos);
+                    System.out.print("Adivina una letra: ");
+
+                    String intento = scan.next().toUpperCase();
+                    scan.nextLine();
+
+                    if (intento.length() != 1) {
+                        System.out.println("ERROR: Por favor, ingrese solo una letra.");
+                        continue;
+                    }
+
+                    char letra = intento.charAt(0);
+                    boolean letraAdivinada = false;
+                    StringBuilder adivinarcarActualizado = new StringBuilder(adivinarcar);
+
+                    for (int i = 0; i < palabrasFacil.length(); i++) {
+                        if (palabrasFacil.charAt(i) == letra) {
+                            adivinarcarActualizado.setCharAt(i, letra);
+                            letraAdivinada = true;
+                        }
+                    }
+
+                    if (letraAdivinada) {
+                        System.out.println("¡Bien! La letra '" + letra + "' está en la palabra.");
+                        if (adivinarcar.equals(palabrasFacil)) {
+                            caracterv = true;
+                        }
+                    } else {
+                        intentos--;
+                        System.out.println("¡Fallaste! La letra '" + letra + "' no está. Pierdes una vida.");
+                    }
+                }
+
+                System.out.println("\n=============================================");
+                if (caracterv) {
+                    System.out.println("¡¡FELICIDADES!! Adivinaste la palabra: " + palabrasFacil);
+                } else {
+                    System.out.println("¡JUEGO TERMINADO! Te quedaste sin intentos.");
+                    System.out.println("La palabra secreta era: " + palabrasFacil);
+                }
+
+            }
+
+        }else 
+        Secure rand = new SecureRandom();
         Scanner scan = new Scanner(System.in);
         System.out.println("Cadenas de 7 caracteres, 8 Vidas");
-        Secure rand = new SecretRandom();
-        int intentos = 8; 
-        boolean caracterv = false; 
+        int intentos = 8;
+        boolean caracterv = false;
         String caracter = "";
         String[] palabrasDificil = {"abc123bac321", "crabominable", "siguatepeque", "cadenascon12",
-        "hollowknight", "thebattlecat", "ventiladores", "programacion", "eloteconatol", "alvaritodiaz"};
+            "hollowknight", "thebattlecat", "ventiladores", "programacion", "eloteconatol", "alvaritodiaz"};
         int rand = random.nextInt(palabrasFacil.length);
-        
-            for (int i = 0; i <palabrasFacil.length; i++) {
-                if (i == rand) {
-                    caracter = palabrasFacil[i];
+
+        for (int i = 0; i < palabrasFacil.length; i++) {
+            if (i == rand) {
+                caracter = palabrasFacil[i];
                 }
             }
         
@@ -138,80 +198,8 @@ public class Lab6P1_DenisZepeda {
             System.out.println("¡JUEGO TERMINADO! Te quedaste sin intentos.");
             System.out.println("La palabra secreta era: " + palabrasFacil);
         }
-
+          }
+        while (opc != 0);}
     }
-        
-    public static String[] ahorcadosdificil(String[] palabrasFacil) {
-        System.out.println("Cadenas de 12 caracteres, 10 Vidas");
-        Scanner scan = new Scanner(System.in);
-        Secure rand = new SecretRandom();
-        int intentos = 10; 
-        boolean caracterv = false; 
-        String caracter = "";
-        String[] palarasFacil = {"hangman", "scanner", "validar", "ceviche", "strings", "3arrays",
-            "algebra", "program", "calculo", "chatgpt", "pokemon", "strokes", "11yonce"};
-        int rand = random.nextInt(palabrasFacil.length);
-
-        for (int i = 0; i < palabrasFacil.length; i++) {
-            if (i == rand) {
-                caracter = palabrasFacil[i];
-            }
-        }
-
-        String adivinarcar = ""; 
-
-      
-        for (int i = 0; i < caracter.length(); i++) {
-            adivinarcar += "_";
-        }
-
-        while (intentos > 0 && !caracterv) {
-            System.out.println("\n=============================================");
-            System.out.println("Palabra: " + adivinarcar);
-            System.out.println("Vidas restantes: " + intentos);
-            System.out.print("Adivina una letra: ");
-
-            String intento = scan.next().toUpperCase();
-            scan.nextLine();
-
-            if (intento.length() != 1) {
-                System.out.println("ERROR: Por favor, ingrese solo una letra.");
-                continue; 
-            }
-
-            char letra = intento.charAt(0);
-            boolean letraAdivinada = false;
-            StringBuilder adivinarcarActualizado = new StringBuilder(adivinarcar);
-
-            for (int i = 0; i < palabrasFacil.length(); i++) {
-                if (palabrasFacil.charAt(i) == letra) {
-                    adivinarcarActualizado.setCharAt(i, letra); 
-                    letraAdivinada = true;
-                }
-            }
-
-
-            if (letraAdivinada) {
-                System.out.println("¡Bien! La letra '" + letra + "' está en la palabra.");
-                if (adivinarcar.equals(palabrasFacil)) {
-                    caracterv = true;
-                }
-            } else {
-                intentos--;
-                System.out.println("¡Fallaste! La letra '" + letra + "' no está. Pierdes una vida.");
-            }
-        } 
-
-    
-        System.out.println("\n=============================================");
-        if (caracterv) {
-            System.out.println("¡¡FELICIDADES!! Adivinaste la palabra: " + palabrasFacil);
-        } else {
-            System.out.println("¡JUEGO TERMINADO! Te quedaste sin intentos.");
-            System.out.println("La palabra secreta era: " + palabrasFacil);
-        }
-
-    }
-}
 
 
